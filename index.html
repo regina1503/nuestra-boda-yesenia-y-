@@ -219,13 +219,12 @@
   .rev.ver{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
 
-  /* ===== Flores decorativas ===== */
-  .bienv-card,.regalos-card{position:relative}
-  .flor{position:absolute;pointer-events:none;mix-blend-mode:multiply;z-index:3;height:auto}
-  .flor.tl{width:120px;top:-44px;left:-38px;transform:rotate(-18deg)}
-  .flor.br{width:120px;bottom:-44px;right:-38px;transform:rotate(162deg)}
-  .flor.tr{width:96px;top:-36px;right:-30px;transform:scaleX(-1) rotate(-18deg)}
-  .flor.bl{width:96px;bottom:-36px;left:-30px;transform:scaleX(-1) rotate(162deg)}
+  /* ===== Flores decorativas (PNG sin fondo) ===== */
+  .flor{position:absolute;pointer-events:none;z-index:3;height:auto;filter:drop-shadow(0 3px 4px rgba(60,40,25,.18))}
+  .flor.portada-tl{width:112px;top:-40px;left:-36px;transform:rotate(-14deg)}
+  .flor.portada-bl{width:78px;bottom:-26px;left:-24px;transform:scaleX(-1) rotate(-10deg)}
+  .flor.evento-tr{width:72px;top:-28px;right:-20px;transform:scaleX(-1) rotate(-12deg)}
+  @media (max-width:380px){.flor.portada-tl{width:96px}.flor.portada-bl{width:66px}}
 </style>
 </head>
 <body>
@@ -377,18 +376,11 @@
 </script>
 
 <script>
-  // ---- Flores decorativas en las tarjetas ----
+  // ---- Flores decorativas: solo portada y recepción ----
   (function(){
-    const SRC='image.png';
-    const poner=(sel,pos)=>document.querySelectorAll(sel).forEach(el=>pos.forEach(p=>{
-      const im=document.createElement('img'); im.src=SRC; im.alt=''; im.className='flor '+p; el.appendChild(im);
-    }));
-    poner('.portada-card',['tl','br']);
-    poner('.bienv-card',['tl','br']);
-    poner('.regalos-card',['tr','bl']);
-    document.querySelectorAll('.evento-card').forEach((el,i)=>{
-      const im=document.createElement('img'); im.src=SRC; im.alt=''; im.className='flor '+(i%2?'bl':'tr'); el.appendChild(im);
-    });
+    const flor=(el,cls)=>{ if(!el) return; const im=document.createElement('img'); im.src='flores.png'; im.alt=''; im.className='flor '+cls; el.appendChild(im); };
+    const p=document.querySelector('.portada-card'); flor(p,'portada-tl'); flor(p,'portada-bl');
+    const ev=document.querySelectorAll('.evento-card'); flor(ev[ev.length-1],'evento-tr');
   })();
 </script>
 </body>
