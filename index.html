@@ -218,6 +218,14 @@
   .rev.der{transform:translateX(36px)}
   .rev.ver{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
+
+  /* ===== Flores decorativas ===== */
+  .bienv-card,.regalos-card{position:relative}
+  .flor{position:absolute;pointer-events:none;mix-blend-mode:multiply;z-index:3;height:auto}
+  .flor.tl{width:120px;top:-44px;left:-38px;transform:rotate(-18deg)}
+  .flor.br{width:120px;bottom:-44px;right:-38px;transform:rotate(162deg)}
+  .flor.tr{width:96px;top:-36px;right:-30px;transform:scaleX(-1) rotate(-18deg)}
+  .flor.bl{width:96px;bottom:-36px;left:-30px;transform:scaleX(-1) rotate(162deg)}
 </style>
 </head>
 <body>
@@ -321,9 +329,9 @@
     <div class="velo"></div>
     <div class="contenido rev der">
       <h3>Confirmar<br>asistencia</h3>
-      <!-- Cambia 5210000000000 por el número de WhatsApp (52 + 10 dígitos) -->
+      <!-- Número de WhatsApp (52 + 10 dígitos) -->
       <a class="btn-conf" target="_blank" rel="noopener"
-         href="https://wa.me/5210000000000?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Yessenia%20y%20Alberto%20%F0%9F%A4%8D">confirmar</a>
+         href="https://wa.me/524481077273?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Yessenia%20y%20Alberto%20%F0%9F%A4%8D">confirmar</a>
     </div>
   </section>
 
@@ -366,6 +374,22 @@
   // ---- Animación al aparecer ----
   const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('ver'); io.unobserve(e.target);} }),{threshold:.15});
   document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+
+<script>
+  // ---- Flores decorativas en las tarjetas ----
+  (function(){
+    const SRC='image.png';
+    const poner=(sel,pos)=>document.querySelectorAll(sel).forEach(el=>pos.forEach(p=>{
+      const im=document.createElement('img'); im.src=SRC; im.alt=''; im.className='flor '+p; el.appendChild(im);
+    }));
+    poner('.portada-card',['tl','br']);
+    poner('.bienv-card',['tl','br']);
+    poner('.regalos-card',['tr','bl']);
+    document.querySelectorAll('.evento-card').forEach((el,i)=>{
+      const im=document.createElement('img'); im.src=SRC; im.alt=''; im.className='flor '+(i%2?'bl':'tr'); el.appendChild(im);
+    });
+  })();
 </script>
 </body>
 </html>
