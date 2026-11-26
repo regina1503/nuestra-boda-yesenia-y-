@@ -225,6 +225,7 @@
   .flor.portada-bl{width:120px;bottom:-42px;right:-40px;transform:rotate(170deg)}
   .flor.evento-tr{width:72px;top:-28px;right:-20px;transform:scaleX(-1) rotate(-12deg)}
   @media (max-width:380px){.flor.portada-tl{width:138px}.flor.portada-bl{width:104px}}
+  .flor-final{display:block;width:100%;max-width:380px;height:auto;margin:-14px auto 8px}
 </style>
 </head>
 <body>
@@ -325,13 +326,14 @@
   </section>
 
   <footer>
+    <img class="flor-final" src="flores-final.png" alt="">
     <span class="script">Yessenia &amp; Alberto</span>
     <div class="small caps">19 · 03 · 2027</div>
   </footer>
 </div>
 
 <!-- MÚSICA: pon tu canción como cancion.mp3 en la misma carpeta -->
-<audio id="audio" src="https://raw.githubusercontent.com/regina1503/elvis-falling-in-love-/main/Elvis%20Presley%20-%20Cant%20Help%20Falling%20In%20Love%20(Official%20Audio).mp3" loop preload="none"></audio>
+<audio id="audio" src="https://raw.githubusercontent.com/regina1503/elvis-falling-in-love-/main/Elvis%20Presley%20-%20Cant%20Help%20Falling%20In%20Love%20(Official%20Audio).mp3" loop preload="auto"></audio>
 
 <script>
   // ---- Fecha del evento (hora de la ceremonia) ----
@@ -359,6 +361,13 @@
     else { audio.pause(); setIco(false); }
   });
   setIco(false);
+  // Empieza la canción con el primer toque en cualquier parte de la invitación
+  const iniciar=(e)=>{
+    if(e.target.closest && e.target.closest('#musica')) return;
+    if(audio.paused){ audio.play().then(()=>setIco(true)).catch(()=>{}); }
+    document.removeEventListener('click',iniciar); document.removeEventListener('touchstart',iniciar);
+  };
+  document.addEventListener('click',iniciar); document.addEventListener('touchstart',iniciar,{passive:true});
 
   // ---- Animación al aparecer ----
   const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('ver'); io.unobserve(e.target);} }),{threshold:.15});
