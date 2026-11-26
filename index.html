@@ -333,7 +333,7 @@
 </div>
 
 <!-- MÚSICA: pon tu canción como cancion.mp3 en la misma carpeta -->
-<audio id="audio" data-inicio="2" src="https://raw.githubusercontent.com/regina1503/elvis-falling-in-love-/main/Elvis%20Presley%20-%20Cant%20Help%20Falling%20In%20Love%20(Official%20Audio).mp3" preload="auto"></audio>
+<audio id="audio" src="cancion.mp3" preload="auto" playsinline></audio>
 
 <script>
   // ---- Fecha del evento (hora de la ceremonia) ----
@@ -363,15 +363,18 @@
   setIco(false);
   // La canción empieza en el segundo 2 y al terminar vuelve a empezar desde ahí
   const INICIO=2;
-  audio.addEventListener('play',()=>{ if(audio.currentTime<INICIO) audio.currentTime=INICIO; });
-  audio.addEventListener('ended',()=>{ audio.currentTime=INICIO; audio.play(); });
-  // Empieza la canción con el primer toque en cualquier parte de la invitación
-  const iniciar=(e)=>{
+  const alInicio=()=>{ try{ if(audio.currentTime<INICIO) audio.currentTime=INICIO; }catch(e){} };
+  audio.addEventListener('loadedmetadata',alInicio);
+  audio.addEventListener('play',()=>{ if(audio.readyState>=1) alInicio(); });
+  audio.addEventListener('ended',()=>{ audio.currentTime=INICIO; audio.play().catch(()=>{}); });
+  // Empieza con el primer toque en cualquier parte (en celular cuenta al soltar el dedo)
+  const quitar=()=>['click','touchend','pointerup','keydown'].forEach(ev=>document.removeEventListener(ev,iniciar));
+  function iniciar(e){
     if(e.target.closest && e.target.closest('#musica')) return;
-    if(audio.paused){ audio.play().then(()=>setIco(true)).catch(()=>{}); }
-    document.removeEventListener('click',iniciar); document.removeEventListener('touchstart',iniciar);
-  };
-  document.addEventListener('click',iniciar); document.addEventListener('touchstart',iniciar,{passive:true});
+    if(!audio.paused){ quitar(); return; }
+    audio.play().then(()=>{ setIco(true); quitar(); }).catch(()=>{});
+  }
+  ['click','touchend','pointerup','keydown'].forEach(ev=>document.addEventListener(ev,iniciar));
 
   // ---- Animación al aparecer ----
   const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('ver'); io.unobserve(e.target);} }),{threshold:.15});
