@@ -221,10 +221,10 @@
 
   /* ===== Flores decorativas (PNG sin fondo) ===== */
   .flor{position:absolute;pointer-events:none;z-index:3;height:auto;filter:drop-shadow(0 3px 4px rgba(60,40,25,.18))}
-  .flor.portada-tl{width:112px;top:-40px;left:-36px;transform:rotate(-14deg)}
-  .flor.portada-bl{width:78px;bottom:-26px;left:-24px;transform:scaleX(-1) rotate(-10deg)}
+  .flor.portada-tl{width:160px;top:-58px;left:-52px;transform:rotate(-14deg)}
+  .flor.portada-bl{width:120px;bottom:-42px;left:-40px;transform:scaleX(-1) rotate(-10deg)}
   .flor.evento-tr{width:72px;top:-28px;right:-20px;transform:scaleX(-1) rotate(-12deg)}
-  @media (max-width:380px){.flor.portada-tl{width:96px}.flor.portada-bl{width:66px}}
+  @media (max-width:380px){.flor.portada-tl{width:138px}.flor.portada-bl{width:104px}}
 </style>
 </head>
 <body>
@@ -295,7 +295,7 @@
         <div class="linea"></div>
         <h3>Recepción</h3>
         <div class="dir" style="margin-top:14px">Loc. Barrio San Pedro S/N, 50900 Almoloya de Juárez, Méx.</div>
-        <a class="mapa" target="_blank" rel="noopener" href="https://maps.google.com/?q=Barrio+San+Pedro+Almoloya+de+Juarez">Ver ubicación</a>
+        <a class="mapa" target="_blank" rel="noopener" href="https://maps.app.goo.gl/NEnwMf7Nwz5JGpkT9">Ver ubicación</a>
       </div>
     </div>
   </section>
@@ -376,11 +376,10 @@
 </script>
 
 <script>
-  // ---- Flores decorativas: solo portada y recepción ----
+  // ---- Flores decorativas: solo en la portada ----
   (function(){
     const flor=(el,cls)=>{ if(!el) return; const im=document.createElement('img'); im.src='flores.png'; im.alt=''; im.className='flor '+cls; el.appendChild(im); };
     const p=document.querySelector('.portada-card'); flor(p,'portada-tl'); flor(p,'portada-bl');
-    const ev=document.querySelectorAll('.evento-card'); flor(ev[ev.length-1],'evento-tr');
   })();
 </script>
 </body>
