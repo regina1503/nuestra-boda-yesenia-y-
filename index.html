@@ -119,7 +119,7 @@
   .ramita{display:block;margin:0 auto 18px;width:120px;height:auto}
 
   #musica{
-    position:absolute;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+    position:absolute;left:50%;transform:translateX(-50%);bottom:16px;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
     background:rgba(243,237,226,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);
   }
   #musica svg{width:18px;height:18px;fill:var(--cafe)}
@@ -222,7 +222,7 @@
   /* ===== Flores decorativas (PNG sin fondo) ===== */
   .flor{position:absolute;pointer-events:none;z-index:3;height:auto;filter:drop-shadow(0 3px 4px rgba(60,40,25,.18))}
   .flor.portada-tl{width:160px;top:-58px;left:-52px;transform:rotate(-14deg)}
-  .flor.portada-bl{width:120px;bottom:-42px;left:-40px;transform:scaleX(-1) rotate(-10deg)}
+  .flor.portada-bl{width:120px;bottom:-42px;right:-40px;transform:rotate(170deg)}
   .flor.evento-tr{width:72px;top:-28px;right:-20px;transform:scaleX(-1) rotate(-12deg)}
   @media (max-width:380px){.flor.portada-tl{width:138px}.flor.portada-bl{width:104px}}
 </style>
