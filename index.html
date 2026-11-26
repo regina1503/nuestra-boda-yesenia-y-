@@ -224,6 +224,12 @@
   .flor.portada-tl{width:160px;top:-58px;left:-52px;transform:rotate(-14deg)}
   .flor.portada-bl{width:120px;bottom:-42px;right:-40px;transform:rotate(170deg)}
   .flor.evento-tr{width:72px;top:-28px;right:-20px;transform:scaleX(-1) rotate(-12deg)}
+  .cuenta{position:relative}
+  .flor.cuenta-tr{width:130px;top:-26px;right:-34px;transform:scaleX(-1) rotate(-14deg)}
+  .flor.cuenta-bl{width:92px;bottom:-18px;left:-26px;transform:rotate(166deg)}
+  .flor.padrinos-tl{width:118px;top:-22px;left:-30px;transform:rotate(-14deg)}
+  .flor.padrinos-br{width:118px;bottom:-22px;right:-30px;transform:rotate(166deg)}
+  .flor.evento-tr{width:96px;top:-36px;right:-28px;transform:scaleX(-1) rotate(-12deg)}
   @media (max-width:380px){.flor.portada-tl{width:138px}.flor.portada-bl{width:104px}}
   .flor-final{display:block;width:78%;max-width:270px;height:auto;margin:-14px auto -28px}
 </style>
@@ -382,10 +388,13 @@
 </script>
 
 <script>
-  // ---- Flores decorativas: solo en la portada ----
+  // ---- Flores decorativas: portada, cuenta regresiva, recepción y padrinos ----
   (function(){
     const flor=(el,cls)=>{ if(!el) return; const im=document.createElement('img'); im.src='flores.png'; im.alt=''; im.className='flor '+cls; el.appendChild(im); };
     const p=document.querySelector('.portada-card'); flor(p,'portada-tl'); flor(p,'portada-bl');
+    const c=document.querySelector('.cuenta'); flor(c,'cuenta-tr'); flor(c,'cuenta-bl');
+    const pa=document.querySelector('.padrinos'); flor(pa,'padrinos-tl'); flor(pa,'padrinos-br');
+    const ev=document.querySelectorAll('.evento-card'); flor(ev[ev.length-1],'evento-tr');
   })();
 </script>
 </body>
