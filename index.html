@@ -339,7 +339,7 @@
 </div>
 
 <!-- MÚSICA: pon tu canción como cancion.mp3 en la misma carpeta -->
-<audio id="audio" src="cancion.mp3" preload="auto" playsinline></audio>
+<audio id="audio" preload="auto" playsinline><source src="cancion.wav" type="audio/wav"></audio>
 
 <script>
   // ---- Fecha del evento (hora de la ceremonia) ----
@@ -367,8 +367,8 @@
     else { audio.pause(); setIco(false); }
   });
   setIco(false);
-  // La canción empieza en el segundo 2 y al terminar vuelve a empezar desde ahí
-  const INICIO=2;
+  // Al terminar la canción vuelve a empezar
+  const INICIO=0; // el archivo cancion.wav ya empieza en el segundo 2
   const alInicio=()=>{ try{ if(audio.currentTime<INICIO) audio.currentTime=INICIO; }catch(e){} };
   audio.addEventListener('loadedmetadata',alInicio);
   audio.addEventListener('play',()=>{ if(audio.readyState>=1) alInicio(); });
